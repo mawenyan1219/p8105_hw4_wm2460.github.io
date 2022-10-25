@@ -1,0 +1,13 @@
+name: "Yay internet!"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - text: "About"
+      href: about.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<mawenyan1219@gmail.com>
+    - icon: fa-github fa-lg
+      href: http://github.com/mawenyan1219/
+output:
+  html_document
