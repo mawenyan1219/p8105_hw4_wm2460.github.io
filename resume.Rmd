@@ -1,0 +1,10 @@
+---
+title: "Resume"
+output: 
+  html_document:
+    toc: false
+    toc_float: false
+---
+
+## Here is my resume:
+![](files/resume.jpg)
