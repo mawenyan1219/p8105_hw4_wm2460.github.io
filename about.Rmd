@@ -6,6 +6,5 @@ output:
     toc_float: false
 ---
 
-### About this site
 
 You can find my resume, and a dashboard about NY NOAA in this website. Please share and feedback to make this website better via email. Thank you so much, and enjoy!

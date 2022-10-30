@@ -16,9 +16,8 @@ Hope you are having a fantastic day, and enjoy exploring this website!
 
 #### Find the [GitHub repository](https://github.com/mawenyan1219/p8105_hw4_wm2460.github.io.git) about this assignment.
 
-#### Here is my [resume](resume.html)
+#### Here is my [Resume](resume.html).
 
-#### Here is the [Dashboard for NY NOAA](dashboard.html)
+#### Here is the [Dashboard for NY NOAA](dashboard.html).
 
-#### Connect with me on [LinkedIn](www.linkedin.com/in/wenyanma)
 
