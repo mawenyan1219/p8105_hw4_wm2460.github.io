@@ -29,6 +29,8 @@ noaa_new = ny_noaa %>%
          tmax = tmax / 10,
          prcp = prcp / 10) %>% 
   select(-day, -snwd)
+
+## Only considering the weather data for the year of 2010, and adjusted some variables to make them within reasonable ranges.
 ```
 
 Column {data-width=650}
@@ -40,17 +42,21 @@ Column {data-width=650}
 noaa_new %>% 
   mutate(text_label = as.factor(month)) %>% 
   plot_ly(x = ~ tmin, y = ~ tmax, color = ~ month, type = "scatter", mode = "markers", text = ~ text_label, alpha = 0.5)
+
+## This plot shows that there is a positive relationship between tmin and tmax in 2010: as tmin increases, tmax increases. 
 ```
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B: tmax trends in 2010
+### Chart B: tmax trends in 2010 by month
 
 ```{r, message=FALSE, echo=FALSE}
 noaa_new %>% 
   mutate(month = as.factor(month)) %>% 
-  plot_ly(y = ~ tmax, color = ~ month, type = "box", colors = "viridis")
+  plot_ly(y = ~ tmax, x = ~ month, color = ~ month, text = ~ month,type = "box", colors = "viridis")
+
+## This plot demonstrates the trend of tmax in 2010, we can see that the tmax are higher in summer months and lower in colder months. 
 ```
 
 ### Chart C: number of days with precipitation at station US1NYAB0001 in August 2010
@@ -63,6 +69,11 @@ noaa_new %>%
   count(prcp) %>% 
   mutate(prcp = as.factor(prcp),
          prcp = fct_reorder(prcp, n)) %>% 
-  plot_ly(x = ~prcp, y = ~n, color = ~prcp, type = "bar", colors = "viridis")
+  rename(precipitation = prcp, number_of_days = n) %>% 
+  plot_ly(x = ~precipitation, y = ~number_of_days, color = ~precipitation, type = "bar", colors = "viridis")
+
+## The barplot here shows the number of days the station "US1NYAB0001" detected precipitation in August 2010. There were 14 days that the station detect 0 mm of precipitation and 2 days with 1.3 mm of precipitation.
+
+## to knit: rmarkdown::render("dashboard_template.Rmd", output_format = "flexdashboard::flex_dashboard")
 ```
 
