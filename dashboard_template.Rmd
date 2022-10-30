@@ -1,0 +1,68 @@
+---
+title: "Dashboard for NY NOAA"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(p8105.datasets)
+library(flexdashboard)
+library(plotly)
+```
+
+
+```{r, include=FALSE}
+data("ny_noaa")
+
+noaa_new = ny_noaa %>% 
+  janitor::clean_names() %>%
+  separate(date, into = c("year", "month", "day"), convert = TRUE) %>% 
+  filter(year %in% c("2010")) %>% 
+  mutate(tmax = as.numeric(tmax), 
+         tmin = as.numeric(tmin),
+         tmin = tmin / 10,
+         tmax = tmax / 10,
+         prcp = prcp / 10) %>% 
+  select(-day, -snwd)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A: tmix vs tmax in 2010
+
+```{r, message=FALSE, echo=FALSE}
+noaa_new %>% 
+  mutate(text_label = as.factor(month)) %>% 
+  plot_ly(x = ~ tmin, y = ~ tmax, color = ~ month, type = "scatter", mode = "markers", text = ~ text_label, alpha = 0.5)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B: tmax trends in 2010
+
+```{r, message=FALSE, echo=FALSE}
+noaa_new %>% 
+  mutate(month = as.factor(month)) %>% 
+  plot_ly(y = ~ tmax, color = ~ month, type = "box", colors = "viridis")
+```
+
+### Chart C: number of days with precipitation at station US1NYAB0001 in August 2010
+
+```{r, message=FALSE, echo=FALSE}
+noaa_new %>% 
+  drop_na(prcp) %>% 
+  filter(id %in% c("US1NYAB0001")) %>% 
+  filter(month %in% c("8")) %>%
+  count(prcp) %>% 
+  mutate(prcp = as.factor(prcp),
+         prcp = fct_reorder(prcp, n)) %>% 
+  plot_ly(x = ~prcp, y = ~n, color = ~prcp, type = "bar", colors = "viridis")
+```
+
