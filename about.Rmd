@@ -7,4 +7,4 @@ output:
 ---
 
 
-You can find my resume and a dashboard about NY NOAA in this website. Please share any feedback to make this website better via email. Thank you so much and enjoy!
+You can find my [Resume](resume.html) and the [Dashboard for NY NOAA](dashboard_template.html) in this website. Please share any feedback to make this website better via email. Thank you so much and enjoy!
